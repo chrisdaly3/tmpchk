@@ -3,10 +3,12 @@ A minimal CLI weather application, which connects to the [Open-Meteo.com](https:
 This is an application inteded for learning purposes for beginners with Go.
 
 ## Installation
-```
-$ go get github.com/chrisdaly3/tmpchk
-& cd $GOPATH/src/github.com/chrisdaly3/tmpchk && go install
-```
+
+`$ go install github.com/chrisdaly3/tmpchk`
+
+* or for Local Development
+`$ go get github.com/chrisdaly3/tmpchk`
+`$ cd <tmpchk-directory>; go build .`
 
 ## Use
 #### Note - for faster location queries, use comma's in location arg
