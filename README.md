@@ -9,7 +9,8 @@ $ go get github.com/chrisdaly3/tmpchk
 ```
 
 ## Use
-`$ tmpchk -l (or --location) <CITY>`
+#### Note - for faster location queries, use comma's in location arg
+`$ tmpchk -l (or --location) <CITY,STATE,COUNTRY>`
 * Results will appear as so:
 ```
 Showing Results for Buffalo, Erie County, New York, United States
