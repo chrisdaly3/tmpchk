@@ -59,10 +59,12 @@ func getCoordinates(location string) (string, string, error) {
 		return "", "", err
 	}
 
-	// Extract lat + lon values from response for injection to weather call
-	if coordResponses[0].Lat == "" || coordResponses[0].Long == "" {
-		return "", "", fmt.Errorf("no results found for %s", location)
+	// len(body) == 2 in cases where the response is empty, apart from Opening & Closing brackets e.g. "[]"
+	if len(body) == 2 {
+		return "", "", fmt.Errorf("no results found for %s. For abbreviated locations, try 'Abbr.Cityname'", location)
 	}
+
+	// Extract lat + lon values from response for injection to weather call
 	color.White("Showing Results for %s", coordResponses[0].DisplayName)
 	return coordResponses[0].Lat, coordResponses[0].Long, nil
 }
