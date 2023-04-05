@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	color "github.com/fatih/color"
 	flag "github.com/ogier/pflag"
@@ -26,6 +27,7 @@ func main() {
 		printUse()
 	}
 
+	start := time.Now()
 	coordLat, coordLon, err := getCoordinates(location)
 	if err != nil {
 		fmt.Println(err)
@@ -34,10 +36,13 @@ func main() {
 	}
 
 	response := getWeather(coordLat, coordLon)
+	end := time.Now()
+	computeTime := end.Sub(start)
 	color.Blue(`Latitude: %v, Longitude: %v`, response.Latitude, response.Longitude)
 	color.Green(`Timezone: %s`, response.Timezone)
 	color.Magenta(`Current Weather - Temp: %v Fahrenheit`, response.CurrentWeather["temperature"])
 	color.Magenta(`Current Weather - Windspeed: %v mph`, response.CurrentWeather["windspeed"])
+	color.White("Time to compute: %v", computeTime)
 }
 
 func printUse() {
