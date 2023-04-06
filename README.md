@@ -4,10 +4,6 @@ This is an application inteded for learning purposes for beginners with Go.
 
 ## Installation
 
-`$ go install github.com/chrisdaly3/tmpchk`
-
-* or for Local Development
-
 `$ go get github.com/chrisdaly3/tmpchk`
 
 `$ cd <tmpchk-directory>; go build .`

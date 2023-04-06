@@ -16,7 +16,7 @@ var (
 
 // Initializes available flags
 func init() {
-	flag.StringVarP(&location, "location", "l", "Philadelphia", "Search by City")
+	flag.StringVarP(&location, "location", "l", "[nameOfCity,XY,USA]", "Search by location")
 }
 func main() {
 	// Parses all flags defined in os.Args[1:], MUST be called before flags are accessed by program.
@@ -27,6 +27,7 @@ func main() {
 		printUse()
 	}
 
+	// Capture compute time, and obtain coordinates of the location declared in --location using the Nominatim Geocoding API
 	start := time.Now()
 	coordLat, coordLon, err := getCoordinates(location)
 	if err != nil {
@@ -35,6 +36,7 @@ func main() {
 		fmt.Println("Exited status 1")
 	}
 
+	// Obtain weather JSON object from Open-Meteo using coordinates from getCoordinates() and print to Console
 	response := getWeather(coordLat, coordLon)
 	end := time.Now()
 	computeTime := end.Sub(start)
@@ -45,8 +47,9 @@ func main() {
 	color.White("Time to compute: %v", computeTime)
 }
 
+// function printUse() prints the default options available to the console
 func printUse() {
-	fmt.Printf("Usage: %s [options]\n", os.Args[0])
+	fmt.Printf("Usage: %s [-l]\n", os.Args[0])
 	fmt.Println("Options: ")
 	flag.PrintDefaults()
 	os.Exit(1)
